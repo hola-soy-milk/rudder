@@ -1,7 +1,7 @@
 use structopt::StructOpt;
 use std::io::BufReader;
 
-use xml::reader::{EventReader, XmlEvent};
+use atom_syndication::Feed;
 
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
@@ -9,12 +9,6 @@ use xml::reader::{EventReader, XmlEvent};
 struct Cli {
     /// The URL
     url: String,
-}
-
-fn indent(size: usize) -> String {
-    const INDENT: &'static str = "    ";
-    (0..size).map(|_| INDENT)
-             .fold(String::with_capacity(size*INDENT.len()), |r, s| r + s)
 }
 
 fn main() {
@@ -31,20 +25,8 @@ fn main() {
         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
     };
     let file = BufReader::new(text.as_bytes());
-    let parser = EventReader::new(file);
-    for e in parser {
-        match e {
-            Ok(XmlEvent::StartElement { name, .. }) => {
-                println!("{}", name);
-            }
-            Ok(XmlEvent::EndElement { name }) => {
-                println!("{}", name);
-            }
-            Err(e) => {
-                println!("Error: {}", e);
-                break;
-            }
-            _ => {}
-        }
-    }
+    let feed = match Feed::read_from(file) {
+        Ok(feed) => { feed }
+        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+    };
 }
