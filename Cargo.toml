@@ -10,3 +10,4 @@ edition = "2018"
 structopt = { version = "0.3.14" }
 reqwest = { version = "0.10.4", features = ["blocking"] }
 atom_syndication = "0.8.0"
+dialoguer = "0.6.2"
