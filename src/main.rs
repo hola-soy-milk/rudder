@@ -2,6 +2,7 @@ use structopt::StructOpt;
 use std::io::BufReader;
 
 use atom_syndication::Feed;
+use dialoguer::Select;
 
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
@@ -29,4 +30,13 @@ fn main() {
         Ok(feed) => { feed }
         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
     };
+
+    let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
+
+    let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
+        Ok(selected) => { selected }
+        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+    };
+
+    println!("{}", feed.entries()[selected].content().unwrap().value().unwrap())
 }
