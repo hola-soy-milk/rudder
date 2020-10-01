@@ -3,6 +3,7 @@ use std::io::BufReader;
 
 use atom_syndication::Feed;
 use dialoguer::Select;
+use rss::Channel;
 
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
@@ -30,14 +31,18 @@ fn main() {
         Ok(feed) => {
             read_feed(feed)
         }
-        Err(error) => {
-            panic!("Can't deal with {}, just exit here", error);
+        Err(_) => {
+            let data = BufReader::new(text.as_bytes());
+            match Channel::read_from(data) {
+                Ok(result) => {
+                }
+                Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+            }
         }
     };
 }
 
 fn read_feed(feed: Feed) {
-
     let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
 
     let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
