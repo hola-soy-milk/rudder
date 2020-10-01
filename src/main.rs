@@ -26,10 +26,17 @@ fn main() {
         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
     };
     let file = BufReader::new(text.as_bytes());
-    let feed = match Feed::read_from(file) {
-        Ok(feed) => { feed }
-        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+    match Feed::read_from(file) {
+        Ok(feed) => {
+            read_feed(feed)
+        }
+        Err(error) => {
+            panic!("Can't deal with {}, just exit here", error);
+        }
     };
+}
+
+fn read_feed(feed: Feed) {
 
     let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
 
