@@ -9,5 +9,6 @@ edition = "2018"
 [dependencies]
 structopt = { version = "0.3.14" }
 reqwest = { version = "0.10.4", features = ["blocking"] }
-atom_syndication = "0.8.0"
+atom_syndication = "0.9.0"
 dialoguer = "0.6.2"
+rss = "1.0"

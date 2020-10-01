@@ -11,13 +11,14 @@ dependencies = [
 
 [[package]]
 name = "atom_syndication"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "687684b9df388f7770003d6181c28acda358e4d8e0d258cff727d1f002cfa7c7"
+checksum = "7d0b2fa7aedc48c4fbe1d38b25c1462a6e7b962397f27a3a8d7cbb1c08f0008b"
 dependencies = [
  "chrono",
  "derive_builder",
- "quick-xml",
+ "diligent-date-parser",
+ "quick-xml 0.18.1",
 ]
 
 [[package]]
@@ -201,6 +202,15 @@ dependencies = [
  "console",
  "lazy_static",
  "tempfile",
+]
+
+[[package]]
+name = "diligent-date-parser"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e37ea528f01b8bfca1f71bcd06a8e6c898bf8fdfbf24dd9dbc7fb49338ed6d84"
+dependencies = [
+ "chrono",
 ]
 
 [[package]]
@@ -757,6 +767,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "quick-xml"
+version = "0.18.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3cc440ee4802a86e357165021e3e255a9143724da31db1e2ea540214c96a0f82"
+dependencies = [
+ "encoding_rs",
+ "memchr",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -872,12 +892,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "rss"
+version = "1.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "99979205510c60f80a119dedbabd0b8426517384edf205322f8bcd51796bcef9"
+dependencies = [
+ "derive_builder",
+ "quick-xml 0.17.2",
+]
+
+[[package]]
 name = "rudder"
 version = "0.1.0"
 dependencies = [
  "atom_syndication",
  "dialoguer",
  "reqwest",
+ "rss",
  "structopt",
 ]
 
