@@ -35,6 +35,12 @@ fn main() {
             let data = BufReader::new(text.as_bytes());
             match Channel::read_from(data) {
                 Ok(result) => {
+                    let titles = result.items().iter().map(|item| item.title().unwrap()).collect::<Vec<_>>();
+                    let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
+                        Ok(selected) => { selected }
+                        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+                    };
+                    println!("{}", result.items()[selected].description().unwrap())
                 }
                 Err(error) => { panic!("Can't deal with {}, just exit here", error); }
             }
@@ -52,3 +58,4 @@ fn read_feed(feed: Feed) {
 
     println!("{}", feed.entries()[selected].content().unwrap().value().unwrap())
 }
+
