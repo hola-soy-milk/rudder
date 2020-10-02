@@ -16,8 +16,11 @@ struct Cli {
 
 fn main() {
     let args = Cli::from_args();
-    println!("url: {}", args.url);
-    let result = reqwest::blocking::get(&args.url);
+    println!("{}", article(args.url));
+}
+
+fn article(url: String) -> String {
+    let result = reqwest::blocking::get(&url);
     let text_result = match result {
         Ok(text_result) => { text_result }
         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
@@ -41,22 +44,22 @@ fn main() {
                         Ok(selected) => { selected }
                         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
                     };
-                    println!("{}", parse_html(result.items()[selected].description().unwrap()))
+                    parse_html(result.items()[selected].description().unwrap())
                 }
                 Err(error) => { panic!("Can't deal with {}, just exit here", error); }
             }
         }
-    };
+    }
 }
 
-fn read_feed(feed: Feed) {
-    let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
+    fn read_feed(feed: Feed) -> String {
+        let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
 
-    let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
-        Ok(selected) => { selected }
-        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
-    };
+        let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
+            Ok(selected) => { selected }
+            Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+        };
 
-    println!("{}", parse_html(feed.entries()[selected].content().unwrap().value().unwrap()))
-}
+        parse_html(feed.entries()[selected].content().unwrap().value().unwrap())
+    }
 
