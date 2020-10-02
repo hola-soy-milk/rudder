@@ -4,6 +4,7 @@ use std::io::BufReader;
 use atom_syndication::Feed;
 use dialoguer::Select;
 use rss::Channel;
+use html2md::parse_html;
 
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
@@ -40,7 +41,7 @@ fn main() {
                         Ok(selected) => { selected }
                         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
                     };
-                    println!("{}", result.items()[selected].description().unwrap())
+                    println!("{}", parse_html(result.items()[selected].description().unwrap()))
                 }
                 Err(error) => { panic!("Can't deal with {}, just exit here", error); }
             }
@@ -56,6 +57,6 @@ fn read_feed(feed: Feed) {
         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
     };
 
-    println!("{}", feed.entries()[selected].content().unwrap().value().unwrap())
+    println!("{}", parse_html(feed.entries()[selected].content().unwrap().value().unwrap()))
 }
 
