@@ -12,3 +12,4 @@ reqwest = { version = "0.10.4", features = ["blocking"] }
 atom_syndication = "0.9.0"
 dialoguer = "0.6.2"
 rss = "1.0"
+html2md = "0.2.10"
