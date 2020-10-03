@@ -58,15 +58,15 @@ fn article(url: String) -> String {
     }
 }
 
-    fn read_feed(feed: Feed) -> String {
-        let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
+fn read_feed(feed: Feed) -> String {
+    let titles = feed.entries().iter().map(|entry| entry.title()).collect::<Vec<_>>();
 
-        let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
-            Ok(selected) => { selected }
-            Err(error) => { panic!("Can't deal with {}, just exit here", error); }
-        };
+    let selected = match Select::new().items(&titles).with_prompt("pick a title").interact() {
+        Ok(selected) => { selected }
+        Err(error) => { panic!("Can't deal with {}, just exit here", error); }
+    };
 
-        let selected_entry = &feed.entries()[selected];
-        parse_html(&format!("<h1>{}</h1>{}", selected_entry.title(), selected_entry.content().unwrap().value().unwrap()))
-    }
+    let selected_entry = &feed.entries()[selected];
+    parse_html(&format!("<h1>{}</h1>{}", selected_entry.title(), selected_entry.content().unwrap().value().unwrap()))
+}
 
