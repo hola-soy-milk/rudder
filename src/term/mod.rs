@@ -1,3 +1,6 @@
+// Example adapted from:
+// https://github.com/Canop/termimad/blob/master/examples/scrollable/main.rs
+
 use crossterm::{
     cursor::{ Hide, Show},
     event::{
