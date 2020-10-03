@@ -21,7 +21,7 @@ struct Cli {
 fn main() {
     let args = Cli::from_args();
     clear().unwrap();
-    run(article(args.url));
+    run(article(args.url)).unwrap();
 }
 
 fn article(url: String) -> String {
