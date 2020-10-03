@@ -47,7 +47,8 @@ fn article(url: String) -> String {
                         Ok(selected) => { selected }
                         Err(error) => { panic!("Can't deal with {}, just exit here", error); }
                     };
-                    parse_html(result.items()[selected].description().unwrap())
+                    let selected_item = &result.items()[selected];
+                    parse_html(&format!("<h1>{}</h1>{}", selected_item.title().unwrap(), selected_item.description().unwrap()))
                 }
                 Err(error) => { panic!("Can't deal with {}, just exit here", error); }
             }
@@ -63,6 +64,7 @@ fn article(url: String) -> String {
             Err(error) => { panic!("Can't deal with {}, just exit here", error); }
         };
 
-        parse_html(feed.entries()[selected].content().unwrap().value().unwrap())
+        let selected_entry = &feed.entries()[selected];
+        parse_html(&format!("<h1>{}</h1>{}", selected_entry.title(), selected_entry.content().unwrap().value().unwrap()))
     }
 
