@@ -8,6 +8,7 @@ use html2md::parse_html;
 
 mod term;
 use term::run;
+use term::clear;
 
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
@@ -19,6 +20,7 @@ struct Cli {
 
 fn main() {
     let args = Cli::from_args();
+    clear().unwrap();
     run(article(args.url));
 }
 

@@ -27,6 +27,12 @@ pub fn run(markdown: String) -> Result<()>{
     run_app(skin, &markdown)
 }
 
+pub fn clear() -> Result<()> {
+    let mut w = stderr(); // we could also have used stdout
+    queue!(w, Clear(ClearType::All))?;
+    Ok(())
+}
+
 fn view_area() -> Area {
     let mut area = Area::full_screen();
     area.pad_for_max_width(120); // we don't want a too wide text column
