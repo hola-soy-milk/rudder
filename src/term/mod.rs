@@ -45,8 +45,8 @@ fn run_app(skin: MadSkin, markdown: &str) -> Result<()> {
         match event::read() {
             Ok(Event::Key(KeyEvent{code, ..})) => {
                 match code {
-                    Up => view.try_scroll_lines(-1),
-                    Down => view.try_scroll_lines(1),
+                    Up | Char('k') => view.try_scroll_lines(-1),
+                    Down | Char('j') => view.try_scroll_lines(1),
                     PageUp => view.try_scroll_pages(-1),
                     PageDown => view.try_scroll_pages(1),
                     _ => break,
