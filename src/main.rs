@@ -6,6 +6,9 @@ use dialoguer::Select;
 use rss::Channel;
 use html2md::parse_html;
 
+mod term;
+use term::run;
+
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(StructOpt)]
 #[structopt(name = "rudder", about = "A dumb thing I guess")]
@@ -16,7 +19,7 @@ struct Cli {
 
 fn main() {
     let args = Cli::from_args();
-    println!("{}", article(args.url));
+    run(article(args.url));
 }
 
 fn article(url: String) -> String {
