@@ -1,5 +1,6 @@
 use structopt::StructOpt;
 use std::io::BufReader;
+use std::io::Error;
 
 use atom_syndication::Feed;
 use dialoguer::Select;
@@ -18,10 +19,10 @@ struct Cli {
     url: String,
 }
 
-fn main() {
+fn main() -> Result<(), Error> {
     let args = Cli::from_args();
-    clear().unwrap();
-    run(article(args.url)).unwrap();
+    clear()?;
+    run(article(args.url))
 }
 
 fn article(url: String) -> String {
