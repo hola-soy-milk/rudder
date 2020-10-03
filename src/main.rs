@@ -19,10 +19,10 @@ struct Cli {
     url: String,
 }
 
-fn main() -> Result<(), Error> {
+fn main() {
     let args = Cli::from_args();
-    clear()?;
-    run(article(args.url))
+    clear().unwrap();
+    run(article(args.url)).unwrap()
 }
 
 fn article(url: String) -> String {
