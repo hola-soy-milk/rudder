@@ -1,8 +1,16 @@
 [package]
 name = "rudder"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["Ramon Huidobro <hola@ramonh.dev>"]
 edition = "2018"
+license = "MIT"
+license_file = "LICENSE"
+description = "A tool to read blogs in the terminal"
+readme = "README.md"
+homepage = "https://github.com/ramonh/rudder"
+repository = "https://github.com/ramonh/rudder"
+keywords = ["cli", "blog", "rss"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
