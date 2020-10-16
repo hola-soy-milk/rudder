@@ -55,7 +55,7 @@ fn run_app(skin: MadSkin, markdown: &str) -> Result<()> {
                     Down | Char('j') => view.try_scroll_lines(1),
                     PageUp => view.try_scroll_pages(-1),
                     PageDown => view.try_scroll_pages(1),
-                    Char('q') => break,
+                    Char('q') | Enter => break,
                     _ => continue,
                 }
             }
