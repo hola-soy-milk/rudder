@@ -1,6 +1,6 @@
 [package]
 name = "rudder"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Ramon Huidobro <hola@ramonh.dev>"]
 edition = "2018"
 license = "MIT"
